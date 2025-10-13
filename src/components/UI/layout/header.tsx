@@ -69,7 +69,7 @@ export default function Header() {
   };
 
   return (
-    <Navbar className={`h-[${layoutConfig.headerHeight}]`}>
+    <Navbar style={{ height: layoutConfig.headerHeight }}>
       <NavbarBrand>
         <Link href="/" className="flex gap-1">
           <Logo />

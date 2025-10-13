@@ -45,7 +45,8 @@ export default function RootLayout({
         </Providers>
 
         <footer
-          className={`h-[${layoutConfig.footerHeight}] w-full flex justify-center items-center mt-auto`}
+          className={`w-full flex justify-center items-center mt-auto`}
+          style={{ height: layoutConfig.footerHeight }}
         >
           <p>{siteConfig.description}</p>
         </footer>
