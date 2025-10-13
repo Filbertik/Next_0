@@ -3,6 +3,7 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Logo = () => {
   return (
@@ -27,6 +28,7 @@ export const Logo = () => {
 };
 
 export default function Header() {
+    const pathname = usePathname();
     const navItems = [
         {href: "/", label: "Рецепти"},
         {href: "/ingridients", label: "Інгредієнти"},
@@ -42,14 +44,26 @@ export default function Header() {
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         {navItems.map((item)=> {
+            const isActive = pathname === item.href
             return (
             <NavbarItem key={item.href}>
-          <Link color="foreground" href={item.href}>
+          <Link color="foreground" href={item.href}
+          className={`px-3 py-1 
+            ${isActive ? "text-blue-500" : "text-foreground"}
+            hover:text-blue-300 hover:brotliDecompress
+            hover:border-blue-300 hover:rounded-md
+            transition-colors
+            transition-border
+            duration-200
+            `}
+          >
             {item.label}
           </Link>
         </NavbarItem>);
                     })}
         
+
+
         {/* <NavbarItem isActive>
           <Link aria-current="page" href="#">
             Customers
