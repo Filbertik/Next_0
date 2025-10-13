@@ -1,6 +1,13 @@
 "use client";
 
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@heroui/react";
+import { siteConfig } from "@/config/site.config";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+} from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,13 +15,13 @@ import { usePathname } from "next/navigation";
 export const Logo = () => {
   return (
     <Image
-    src="/logo_tatar_kitchen.png"
-    alt="Т кухня"
-    width={26}
-    height={26}
-    // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    // placeholder="blur"
-    priority
+      src="/logo_tatar_kitchen.png"
+      alt={siteConfig.title}
+      width={26}
+      height={26}
+      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      // placeholder="blur"
+      priority
     />
     // <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
     //   <path
@@ -28,27 +35,17 @@ export const Logo = () => {
 };
 
 export default function Header() {
-    const pathname = usePathname();
-    const navItems = [
-        {href: "/", label: "Рецепти"},
-        {href: "/ingridients", label: "Інгредієнти"},
-        {href: "/about", label: "Про нас"}
-    ];
+  const pathname = usePathname();
 
-  return (
-    <Navbar>
-      <NavbarBrand>
-        <Link href="/" className="flex gap-1"><Logo />
-        <p className="font-bold text-inherit">Т кухня</p></Link>
-        
-      </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        {navItems.map((item)=> {
-            const isActive = pathname === item.href
-            return (
-            <NavbarItem key={item.href}>
-          <Link color="foreground" href={item.href}
-          className={`px-3 py-1 
+  const getNavItems = () => {
+    return siteConfig.navItems.map((item) => {
+      const isActive = pathname === item.href;
+      return (
+        <NavbarItem key={item.href}>
+          <Link
+            color="foreground"
+            href={item.href}
+            className={`px-3 py-1 
             ${isActive ? "text-blue-500" : "text-foreground"}
             hover:text-blue-300 hover:brotliDecompress
             hover:border-blue-300 hover:rounded-md
@@ -59,29 +56,31 @@ export default function Header() {
           >
             {item.label}
           </Link>
-        </NavbarItem>);
-                    })}
-        
-
-
-        {/* <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Customers
-          </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem> */}
+      );
+    });
+  };
+
+  return (
+    <Navbar>
+      <NavbarBrand>
+        <Link href="/" className="flex gap-1">
+          <Logo />
+          <p className="font-bold text-inherit">{siteConfig.title}</p>
+        </Link>
+      </NavbarBrand>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {getNavItems()}
       </NavbarContent>
+
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
+          <Link href="#">Логін</Link>
         </NavbarItem>
         <NavbarItem>
           <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
+            Реєстрація
           </Button>
         </NavbarItem>
       </NavbarContent>
