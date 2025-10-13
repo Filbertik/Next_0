@@ -27,6 +27,12 @@ export const Logo = () => {
 };
 
 export default function Header() {
+    const navItems = [
+        {href: "/", label: "Рецепти"},
+        {href: "/ingridients", label: "Інгредієнти"},
+        {href: "/about", label: "Про нас"}
+    ];
+
   return (
     <Navbar>
       <NavbarBrand>
@@ -35,12 +41,16 @@ export default function Header() {
         
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
+        {navItems.map((item)=> {
+            return (
+            <NavbarItem key={item.href}>
           <Link color="foreground" href="#">
-            Features
+            {item.label}
           </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
+        </NavbarItem>);
+                    })}
+        
+        {/* <NavbarItem isActive>
           <Link aria-current="page" href="#">
             Customers
           </Link>
@@ -49,7 +59,7 @@ export default function Header() {
           <Link color="foreground" href="#">
             Integrations
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
