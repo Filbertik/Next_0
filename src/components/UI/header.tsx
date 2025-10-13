@@ -1,7 +1,8 @@
 "use client";
 
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@heroui/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button} from "@heroui/react";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Logo = () => {
   return (
@@ -10,6 +11,8 @@ export const Logo = () => {
     alt="Т кухня"
     width={26}
     height={26}
+    // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    // placeholder="blur"
     priority
     />
     // <svg fill="none" height="36" viewBox="0 0 32 32" width="36">
@@ -27,8 +30,9 @@ export default function Header() {
   return (
     <Navbar>
       <NavbarBrand>
-        <Logo />
-        <p className="font-bold text-inherit">ACME</p>
+        <Link href="/" className="flex gap-1"><Logo />
+        <p className="font-bold text-inherit">Т кухня</p></Link>
+        
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
