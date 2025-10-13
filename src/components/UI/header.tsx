@@ -44,7 +44,7 @@ export default function Header() {
         {navItems.map((item)=> {
             return (
             <NavbarItem key={item.href}>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href={item.href}>
             {item.label}
           </Link>
         </NavbarItem>);
