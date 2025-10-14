@@ -1,6 +1,9 @@
 "use client";
 
+import { registerUser } from "@/actions/register";
+// import { prisma } from "@/utils/prisma";
 import { Button, Form, Input } from "@heroui/react";
+import { log } from "console";
 import { useState } from "react";
 
 interface IProps {
@@ -20,9 +23,24 @@ const RegistrationForm = ({ onClose }: IProps) => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    // "use server";
+
     e.preventDefault();
     console.log("Form submitted:", formData);
-    // await registerUser(formData);
+    await registerUser(formData);
+
+    // const user = await prisma.user.create({
+    //   data: {
+    //     email: formData.email,
+    //     password: formData.password,
+    //   },
+    // });
+
+    // console.log("user", user);
+
+    const result = await registerUser(formData);
+
+    console.log(result);
 
     onClose();
   };
