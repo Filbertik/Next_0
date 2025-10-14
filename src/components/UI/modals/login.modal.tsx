@@ -10,7 +10,7 @@ interface IProps {
 
 const LoginModal = ({ isOpen, onClose }: IProps) => {
   return (
-    <CustomModal isOpen={isOpen} onClose={onClose} title="Авторизация">
+    <CustomModal isOpen={isOpen} onClose={onClose} title="Авторизація">
       <LoginForm onClose={onClose} />
     </CustomModal>
   );

@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "prisma:generate": "prisma generate",
     "lint": "eslint"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "@heroui/system": "^2.4.23",
     "@heroui/theme": "^2.4.23",
     "@prisma/client": "^6.17.1",
+    "@prisma/extension-accelerate": "^2.0.2",
     "framer-motion": "^12.23.24",
     "next": "15.5.4",
     "react": "19.1.0",
@@ -32,6 +34,7 @@
     "eslint-config-next": "15.5.4",
     "prisma": "^6.17.1",
     "tailwindcss": "^4",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

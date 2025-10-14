@@ -1,7 +1,8 @@
 "use server";
 
 import { IFormData } from "@/types/form-data";
-import { prisma } from "@/utils/prisma";
+// import { prisma } from "@/utils/prisma";
+import prisma from "@/utils/prisma";
 
 export async function registerUser(formData: IFormData) {
   const { email, password, confirmPassword } = formData;

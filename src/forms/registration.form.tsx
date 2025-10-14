@@ -51,7 +51,7 @@ const RegistrationForm = ({ onClose }: IProps) => {
         aria-label="Email"
         isRequired
         name="email"
-        placeholder="Введите email"
+        placeholder="Введіть email"
         type="email"
         value={formData.email}
         classNames={{
@@ -60,15 +60,15 @@ const RegistrationForm = ({ onClose }: IProps) => {
         }}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         validate={(value) => {
-          if (!value) return "Почта обязательна";
-          if (!validateEmail(value)) return "Некорректный email";
+          if (!value) return "Почта обов'язкова";
+          if (!validateEmail(value)) return "Некоректний email";
           return null;
         }}
       />
       <Input
         isRequired
         name="password"
-        placeholder="Введите пароль"
+        placeholder="Введіть пароль"
         type="password"
         value={formData.password}
         classNames={{
@@ -77,15 +77,15 @@ const RegistrationForm = ({ onClose }: IProps) => {
         }}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         validate={(value) => {
-          if (!value) return "Пароль обязателен";
-          if (value.length < 6) return "Пароль должен быть не менее 6 символов";
+          if (!value) return "Пароль обов'язковий";
+          if (value.length < 6) return "Пароль має бути не менш 6 символів";
           return null;
         }}
       />
       <Input
         isRequired
         name="confirmPassword"
-        placeholder="Подтвердите пароль"
+        placeholder="Підтвердіть пароль"
         type="password"
         value={formData.confirmPassword}
         classNames={{
@@ -96,18 +96,18 @@ const RegistrationForm = ({ onClose }: IProps) => {
           setFormData({ ...formData, confirmPassword: e.target.value })
         }
         validate={(value) => {
-          if (!value) return "Пароль для подтверждения обязателен";
-          if (value !== formData.password) return "Пароли не совпадают";
+          if (!value) return "Пароль для підтвердження обов'язковий";
+          if (value !== formData.password) return "Паролі не співпадають";
           return null;
         }}
       />
 
       <div className="flex w-[100%]  gap-4 items-center pt-8 justify-end">
         <Button variant="light" onPress={onClose}>
-          Отмена
+          Скасувати
         </Button>
         <Button color="primary" type="submit">
-          Зарегистрироваться
+          Зареєструватись
         </Button>
       </div>
     </Form>
