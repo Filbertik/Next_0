@@ -1,40 +1,51 @@
 import NextAuth from "next-auth";
 import { ZodError } from "zod";
 import Credentials from "next-auth/providers/credentials";
-import { signInSchema } from "./lib/zod";
+import { signInSchema } from "@/shema/zod";
 // Your own logic for dealing with plaintext password strings; be careful!
 import { saltAndHashPassword } from "@/utils/password";
-import { getUserFromDb } from "@/utils/db";
+import { getUserFromDb } from "@/utils/user";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/utils/prisma";
+import bcryptjs from "bcryptjs";
 
-export const { handlers, auth } = NextAuth({
+export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     Credentials({
       // You can specify which fields should be submitted, by adding keys to the `credentials` object.
       // e.g. domain, username, password, 2FA token, etc.
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
         try {
-          let user = null;
+          //   let user = null;
+
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Email та пароль обов'язкові");
+          }
 
           const { email, password } = await signInSchema.parseAsync(
             credentials
           );
 
           // logic to salt and hash password
-          const pwHash = saltAndHashPassword(password);
+          //   const pwHash = saltAndHashPassword(password);
 
           // logic to verify if the user exists
-          user = await getUserFromDb(email, pwHash);
+          //   user = await getUserFromDb(email, pwHash);
+          const user = await getUserFromDb(email);
 
-          if (!user) {
-            throw new Error("Invalid credentials.");
+          if (!user || !user.password) {
+            throw new Error("Невірне введення даних / Invalid credentials.");
           }
+
+          const isPasswordValid = await bcryptjs.compare(
+            password,
+            user.password
+          );
 
           // return JSON object with the user data
           return user;
