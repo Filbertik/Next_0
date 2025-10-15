@@ -3,7 +3,7 @@ import { ZodError } from "zod";
 import Credentials from "next-auth/providers/credentials";
 import { signInSchema } from "@/shema/zod";
 // Your own logic for dealing with plaintext password strings; be careful!
-// import { saltAndHashPassword } from "@/utils/password";
+import { saltAndHashPassword } from "@/utils/password";
 import { getUserFromDb } from "@/utils/user";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/utils/prisma";
@@ -47,19 +47,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             user.password
           );
 
-          if (!isPasswordValid) {
-            throw new Error("Невірне введення даних / Invalid credentials.");
-          }
-
           // return JSON object with the user data
-          //   return user;
-          return { id: user.id, email: user.email };
+          return user;
         } catch (error) {
           if (error instanceof ZodError) {
             // Return `null` to indicate that the credentials are invalid
             return null;
           }
-          return null;
         }
       },
     }),
