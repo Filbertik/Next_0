@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import RegistrationModal from "../modals/registration.modal";
 import LoginModal from "../modals/login.modal";
 import { useState } from "react";
+import { signOutFunc } from "@/actions/sign-out";
 
 export const Logo = () => {
   return (
@@ -43,6 +44,10 @@ export default function Header() {
 
   const [isRegistrationOpen, setRegistrationOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOutFunc();
+  };
 
   const getNavItems = () => {
     return siteConfig.navItems.map((item) => {
@@ -92,6 +97,19 @@ export default function Header() {
             onPress={() => setIsLoginOpen(true)}
           >
             Логін
+          </Button>
+        </NavbarItem>
+
+        <NavbarItem className="hidden lg:flex">
+          {/* <Link href="#">Логін</Link> */}
+          <Button
+            as={Link}
+            color="primary"
+            href="#"
+            variant="flat"
+            onPress={handleSignOut}
+          >
+            Вийти
           </Button>
         </NavbarItem>
         <NavbarItem>
