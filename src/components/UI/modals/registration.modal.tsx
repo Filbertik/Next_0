@@ -13,7 +13,7 @@ const RegistrationModal = ({ isOpen, onClose }: IProps) => {
     <CustomModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Реєстація / Створити акаунт"
+      title="Реєстація / Створити_акаунт"
     >
       <RegistrationForm onClose={onClose} />
     </CustomModal>
